@@ -7,7 +7,9 @@ const config = {
     content: path.join(__dirname, 'src', 'content'),
     templates: path.join(__dirname, 'src', 'templates'),
     css: path.join(__dirname, 'src', 'css'),
-    dist: path.join(__dirname, 'dist')
+    images: path.join(__dirname, 'src', 'images'),
+    dist: path.join(__dirname, 'dist'),
+    src: path.join(__dirname, 'src')
 };
 
 // Ensure dist directory exists and is empty
@@ -15,9 +17,13 @@ fs.emptyDirSync(config.dist);
 
 // Create necessary directories
 fs.mkdirpSync(path.join(config.dist, 'blog'));
+fs.mkdirpSync(path.join(config.dist, 'images'));
 
-// Copy CSS files
+// Copy static files
 fs.copySync(config.css, path.join(config.dist, 'css'));
+fs.copySync(config.images, path.join(config.dist, 'images'));
+fs.copySync(path.join(config.src, 'index.html'), path.join(config.dist, 'index.html'));
+console.log('Copied: static files');
 
 // Read base template
 const baseTemplate = fs.readFileSync(
@@ -55,11 +61,6 @@ function buildPages(dir, baseOutputPath = '') {
         const fullPath = path.join(dir, item);
         const stat = fs.statSync(fullPath);
 
-        // Skip index.md as we're using a direct index.html
-        if (item === 'index.md') {
-            return;
-        }
-
         if (stat.isDirectory()) {
             // Recursively process subdirectories
             const newBasePath = path.join(baseOutputPath, item);
@@ -82,56 +83,6 @@ function buildPages(dir, baseOutputPath = '') {
         }
     });
 }
-
-// Create index.html template
-const indexTemplate = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to My Website</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/blog">Blog</a>
-            <a href="/about">About</a>
-            <a href="/faq">FAQ</a>
-        </nav>
-    </header>
-
-    <main>
-        <h1>Welcome to My Website</h1>
-        
-        <p>Welcome to my personal website! Here you'll find my thoughts, experiences, and work.</p>
-        
-        <section>
-            <h2>Recent Blog Posts</h2>
-            <p>Check out my latest articles in the <a href="/blog">blog section</a>.</p>
-        </section>
-        
-        <section>
-            <h2>About Me</h2>
-            <p>I'm passionate about technology and writing. Learn more <a href="/about">about me</a> and my journey.</p>
-        </section>
-        
-        <section>
-            <h2>Questions?</h2>
-            <p>Have questions? Check out the <a href="/faq">FAQ page</a> for common inquiries.</p>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Your Name. All rights reserved.</p>
-    </footer>
-</body>
-</html>`;
-
-// Write index.html
-fs.writeFileSync(path.join(config.dist, 'index.html'), indexTemplate);
-console.log('Created: index.html');
 
 // Start the build process
 console.log('Building site...');
