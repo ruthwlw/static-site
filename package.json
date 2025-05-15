@@ -1,0 +1,15 @@
+{
+  "name": "static-site",
+  "version": "1.0.0",
+  "description": "Simple static site with markdown support",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "marked": "^11.1.0",
+    "front-matter": "^4.0.2"
+  }
+}
