@@ -1,15 +1,24 @@
 {
   "name": "static-site",
   "version": "1.0.0",
-  "description": "Simple static site with markdown support",
-  "main": "server.js",
+  "description": "A static site generator",
+  "main": "build.js",
   "scripts": {
+    "build": "node build.js",
+    "clean": "rm -rf dist/*",
     "start": "node server.js",
-    "build": "node build.js"
+    "dev": "npm run build && npm start"
   },
+  "keywords": [
+    "static-site",
+    "markdown",
+    "blog"
+  ],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "marked": "^11.1.0",
-    "front-matter": "^4.0.2"
+    "fs-extra": "^10.0.0",
+    "marked": "^4.0.0"
   }
 }
