@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="/"><img src="/images/logo/logo.png" alt="Haomomo" class="logo-image"></a>
+                </div>
+                <div class="nav-links">
+                    <a href="/blog">Blog</a>
+                    <a href="/about">About</a>
+                    <a href="/faq">FAQ</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="content-page">
+        {{ content }}
+
+        <div id="newsletter" class="newsletter-section">
+            <h2>Subscribe to My Newsletter</h2>
+            <form action="https://app.convertkit.com/forms/8063673/subscriptions" method="post" class="seva-form formkit-form">
+                <input type="email" name="email_address" placeholder="Your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Haomomo. All rights reserved.</p>
+    </footer>
+</body>
+</html> 

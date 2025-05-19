@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - Haomomo Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="/"><img src="/images/logo/logo.png" alt="Haomomo" class="logo-image"></a>
+                </div>
+                <div class="nav-links">
+                    <a href="/blog" class="active">Blog</a>
+                    <a href="/about">About</a>
+                    <a href="/faq">FAQ</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="blog-title-banner">
+        <h1>{{ title }}</h1>
+        <div class="post-meta">
+            <time datetime="{{ date }}">{{ date }}</time>
+            {{ author_section }}
+        </div>
+    </div>
+
+    <main class="content-page blog-post">
+        <article>
+            <div class="post-content">
+                {{ content_without_title }}
+            </div>
+            <div class="convertkit-form-wrapper">
+                <div class="convertkit-content">
+                    <h3>Stay Updated</h3>
+                    <p>Get the latest updates on sustainable parenting and exclusive early access to new products.</p>
+                </div>
+                <form action="https://app.convertkit.com/forms/8063673/subscriptions" method="post" class="seva-form formkit-form">
+                    <div class="formkit-field">
+                        <input 
+                            name="email_address" 
+                            placeholder="Your email address" 
+                            required="" 
+                            type="email"
+                            class="formkit-input"
+                        >
+                    </div>
+                    <button type="submit" class="formkit-submit">
+                        <span>Subscribe</span>
+                    </button>
+                </form>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Haomomo. All rights reserved.</p>
+    </footer>
+</body>
+</html> 

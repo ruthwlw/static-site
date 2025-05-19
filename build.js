@@ -23,6 +23,7 @@ fs.mkdirpSync(path.join(config.dist, 'images/blog'));
 // Copy static files
 fs.copySync(config.css, path.join(config.dist, 'css'));
 fs.copySync(config.images, path.join(config.dist, 'images'));
+fs.copySync(path.join(config.src, 'index.html'), path.join(config.dist, 'index.html'));
 console.log('Copied: static files');
 
 // Read templates
@@ -38,6 +39,12 @@ const blogTemplate = fs.readFileSync(
 
 const blogIndexTemplate = fs.readFileSync(
     path.join(config.templates, 'blog-index.html'),
+    'utf-8'
+);
+
+// Read partials
+const convertKitPartial = fs.readFileSync(
+    path.join(config.templates, 'partials/convertkit.html'),
     'utf-8'
 );
 
@@ -76,7 +83,8 @@ function processMarkdown(filePath, template = baseTemplate) {
     let page = template
         .replace(/{{ title }}/g, title)
         .replace('{{ content }}', html)
-        .replace('{{ content_without_title }}', htmlWithoutTitle);
+        .replace('{{ content_without_title }}', htmlWithoutTitle)
+        .replace('{{ convertkit }}', convertKitPartial);
 
     // Replace date and author if they exist
     if (date) {
@@ -116,7 +124,9 @@ function buildPages(dir, baseOutputPath = '', template = baseTemplate) {
             // Generate output path
             const outputName = path.basename(item, '.md') + '.html';
             const outputPath = path.join(config.dist, baseOutputPath, outputName);
-            const relativeUrl = path.join(baseOutputPath, path.basename(item, '.md'));
+            const relativeUrl = baseOutputPath === 'blog' ? 
+                '/' + path.join(baseOutputPath, path.basename(item, '.md')) :
+                '/' + path.join(baseOutputPath, path.basename(item, '.md'));
             
             // Ensure output directory exists
             fs.mkdirpSync(path.dirname(outputPath));
